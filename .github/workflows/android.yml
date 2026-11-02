@@ -1,0 +1,23 @@
+name: Construir APK Android
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar proyecto
+        uses: actions/checkout@v4
+
+      - name: Preparar Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          workdir: .
+          buildozer_version: stable
+
+      - name: Guardar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SlendermanEscape-APK
+          path: bin/*.apk
